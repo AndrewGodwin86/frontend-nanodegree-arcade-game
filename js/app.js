@@ -6,8 +6,13 @@ var Enemy = function() {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
-    this.x = x;
-    this.y = y;
+    enemyLanes = [60,144,228];
+    laneChooser = Math.floor(Math.random()*2.999);
+    this.x = -100;
+    this.y = enemyLanes[laneChooser];
+
+    this.velocity = Math.random() * 200;
+
 }
 
 // Update the enemy's position, required method for game
@@ -16,6 +21,13 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+    if (this.x >= 606){
+        this.x = -101;
+        this.velocity = 50+(Math.random()*200);
+        //this.y = Math.floor(Math.random()*2.999);
+    } else {
+        this.x += this.velocity * dt;
+    }
 }
 
 // Draw the enemy on the screen, required method for game
@@ -65,6 +77,12 @@ Player.prototype.handleInput = function(keyCode) {
 
 var allEnemies = [];
 var player = new Player();
+var numberOfEnemies = 5;
+for (var i=0; i<numberOfEnemies;i++){
+    allEnemies.push(new Enemy());
+}
+
+
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
