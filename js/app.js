@@ -41,18 +41,21 @@ Player.prototype.render = function() {
 };
 
 Player.prototype.handleInput = function(code) {
-    console.log(code);
-    if (code === 'left') {
+    if (code === 'left' && this.x > 0) {
         this.x -= 101;
+        console.log(this.x+", "+this.y);
     }
-    if (code === 'up') {
+    if (code === 'up' && this.y > 64) {
         this.y -= 84;
+        console.log(this.x+", "+this.y);
     }
-    if (code === 'right') {
+    if (code === 'right' && this.x < 400) {
         this.x += 101;
+        console.log(this.x+", "+this.y);
     }
-    if (code === 'down') {
+    if (code === 'down' && this.y < 400) {
         this.y += 84;
+        console.log(this.x+", "+this.y);
     }
 
 };
