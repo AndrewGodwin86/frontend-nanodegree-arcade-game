@@ -1,3 +1,7 @@
+// Lives
+var lives = 5;
+var livesContainer = document.getElementById("lives");
+
 // Enemies our player must avoid
 var Enemy = function() {
     // Variables applied to each of our instances go here,
@@ -34,9 +38,11 @@ Enemy.prototype.update = function(dt) {
         if(player.y >= this.y - 30 && player.y <= this.y + 30){
             player.x = 200;
             player.y = 400;
+            lives --;
+            livesContainer.innerHTML = lives;
+            console.log(lives);
         }
     }
-
 }
 
 // Draw the enemy on the screen, required method for game
@@ -90,6 +96,7 @@ var numberOfEnemies = 5;
 for (var i=0; i<numberOfEnemies;i++){
     allEnemies.push(new Enemy());
 }
+livesContainer.innerHTML = lives;
 
 
 
