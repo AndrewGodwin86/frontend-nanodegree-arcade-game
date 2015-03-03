@@ -28,6 +28,15 @@ Enemy.prototype.update = function(dt) {
     } else {
         this.x += this.velocity * dt;
     }
+
+    // Send player back to start when hit by an enemy
+    if(player.x >= this.x - 75 && player.x <= this.x + 75){
+        if(player.y >= this.y - 30 && player.y <= this.y + 30){
+            player.x = 200;
+            player.y = 400;
+        }
+    }
+
 }
 
 // Draw the enemy on the screen, required method for game
