@@ -1,16 +1,18 @@
 // Lives
 var numberOfLives = 5;
 var livesContainer = document.getElementById("lives");
+var enemyLanes = [60,144,228];
+var enemyVelocities = [100,125,150,175,200,225,250];
 
 
 var Life = function(pos) {
-    this.sprite = 'images/Heart.png';
-    this.x = pos*50;
-    this.y = -20;
+    this.sprite = 'images/Heart_small.png';
+    this.x = pos*40;
+    this.y = -10;
 };
 
 Life.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y, 50, 85);
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y, 40, 68);
 }
 
 // Enemies our player must avoid
@@ -21,12 +23,9 @@ var Enemy = function() {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
-    enemyLanes = [60,144,228];
-    laneChooser = Math.floor(Math.random()*2.999);
     this.x = -100;
-    this.y = enemyLanes[laneChooser];
-
-    this.velocity = Math.random() * 200;
+    this.y = enemyLanes[Math.floor(Math.random()*3)];
+    this.velocity = enemyVelocities[Math.floor(Math.random()*7)]
 
 }
 
@@ -52,6 +51,15 @@ Enemy.prototype.update = function(dt) {
             numberOfLives --;
             lives.pop();
             livesContainer.innerHTML = lives.length;
+            if(numberOfLives === 0){
+                ctx.font = "48px serif";
+                ctx.fillStyle = "white";
+                ctx.fillText = ("Game Over",300,200);
+                console.log("Game over");
+                allEnemies.forEach(function(enemy) {
+                    enemy.velocity = 0;
+                });
+            }
         }
     }
 }
