@@ -115,6 +115,7 @@ var Engine = (function(global) {
                 'images/grass-block.png',   // Row 1 of 2 of grass
                 'images/grass-block.png'    // Row 2 of 2 of grass
             ],
+            topPadding = 30,
             numRows = 6,
             numCols = 5,
             row, col;
@@ -151,8 +152,11 @@ var Engine = (function(global) {
         allEnemies.forEach(function(enemy) {
             enemy.render();
         });
-
+        lives.forEach(function(life) {
+            life.render();
+        });
         player.render();
+
     }
 
     /* This function does nothing but it could have been a good place to
@@ -172,7 +176,8 @@ var Engine = (function(global) {
         'images/water-block.png',
         'images/grass-block.png',
         'images/enemy-bug.png',
-        'images/char-boy.png'
+        'images/char-boy.png',
+        'images/Heart.png'
     ]);
     Resources.onReady(init);
 

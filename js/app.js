@@ -1,6 +1,17 @@
 // Lives
-var lives = 5;
+var numberOfLives = 5;
 var livesContainer = document.getElementById("lives");
+
+
+var Life = function(pos) {
+    this.sprite = 'images/Heart.png';
+    this.x = pos*50;
+    this.y = -20;
+};
+
+Life.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y, 50, 85);
+}
 
 // Enemies our player must avoid
 var Enemy = function() {
@@ -38,9 +49,9 @@ Enemy.prototype.update = function(dt) {
         if(player.y >= this.y - 30 && player.y <= this.y + 30){
             player.x = 200;
             player.y = 400;
-            lives --;
-            livesContainer.innerHTML = lives;
-            console.log(lives);
+            numberOfLives --;
+            lives.pop();
+            livesContainer.innerHTML = lives.length;
         }
     }
 }
@@ -89,14 +100,18 @@ Player.prototype.handleInput = function(keyCode) {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-
+var lives = [];
+for (var i=0; i<numberOfLives; i++){
+    lives.push(new Life(i));
+}
 var allEnemies = [];
 var player = new Player();
+
 var numberOfEnemies = 5;
-for (var i=0; i<numberOfEnemies;i++){
+for (var j=0; j<numberOfEnemies;j++){
     allEnemies.push(new Enemy());
 }
-livesContainer.innerHTML = lives;
+livesContainer.innerHTML = lives.length;
 
 
 
